@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jellycat Snuggle Tap 🐻</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&amp;family=Fredoka:wght@400;600&amp;display=swap');
+        
+        :root {
+            --primary: #ff9ecd;
+            --accent: #a8e6cf;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Fredoka', 'Comic Neue', sans-serif;
+            background: linear-gradient(180deg, #fff0f8 0%, #e0f7fa 100%);
+            height: 100vh;
+            overflow: hidden;
+            color: #5c4033;
+            touch-action: manipulation;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            background: #fff;
+            position: relative;
+        }
+        
+        header {
+            background: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #ffe4e1;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .stars {
+            font-size: 1.4em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .star-icon {
+            font-size: 1.6em;
+            animation: sparkle 1.5s infinite alternate;
+        }
+        
+        .main-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+            background: url('https://picsum.photos/id/1015/800/1000') center/cover; /* Soft blanket texture placeholder */
+            overflow: hidden;
+        }
+        
+        .nursery-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,240,248,0.9), rgba(224,247,250,0.8));
+            z-index: 1;
+        }
+        
+        .character {
+            width: 280px;
+            height: 280px;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            z-index: 2;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+        }
+        
+        .character:active {
+            transform: scale(0.92) rotate(3deg);
+        }
+        
+        .dragon {
+            display: none;
+            width: 240px;
+            height: 240px;
+        }
+        
+        .tap-effect {
+            position: absolute;
+            font-size: 2em;
+            pointer-events: none;
+            animation: floatUp 1.2s forwards;
+            z-index: 10;
+        }
+        
+        .bottom-bar {
+            background: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-around;
+            border-top: 3px solid #ffe4e1;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255,158,205,0.4);
+        }
+        
+        button:hover, button:active {
+            transform: scale(1.05);
+        }
+        
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            margin: 0 0 15px 0;
+            color: var(--primary);
+        }
+        
+        @keyframes sparkle {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-150px); opacity: 0; }
+        }
+        
+        .info {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="stars" id="star-count">
+                <span class="star-icon">⭐</span>
+                <span id="stars">0</span>
+            </div>
+            <h2 style="margin:0; font-size:1.3em; color:#ff9ecd;">🐻 Jelly Nursery</h2>
+            <button onclick="resetGame()" style="background:#a8e6cf; padding:8px 16px; font-size:0.9em;">Reset</button>
+        </header>
+        
+        <!-- Main Game Area -->
+        <div class="main-area" id="main-area">
+            <div class="nursery-bg"></div>
+            
+            <!-- Bartholomew Bear -->
+            <img id="bear" 
+                 src="https://i.pinimg.com/736x/5f/7e/8f/5f7e8f0e5e5b0e5f5e5b0e5f5e5b0e5f.jpg" 
+                 alt="Bartholomew Bear" 
+                 class="character"
+                 onclick="tapCharacter(this)">
+            
+            <!-- Sky Dragon (initially hidden) -->
+            <img id="dragon" 
+                 src="https://i.pinimg.com/736x/34/60/e4/3460e44ffc8f23eef7eee132f4492caa.jpg" 
+                 alt="Sky Dragon" 
+                 class="character dragon"
+                 onclick="tapCharacter(this)">
+            
+            <div class="info">Tap your Jellycat to give hugs! ❤️</div>
+        </div>
+        
+        <!-- Bottom Bar -->
+        <div class="bottom-bar">
+            <button onclick="showShop()">🛍️ Shop</button>
+            <button onclick="giveBigHug()">🤗 Big Hug</button>
+            <button onclick="toggleMusic()">🎵 Music</button>
+        </div>
+    </div>
+    
+    <!-- Unlock Modal -->
+    <div id="unlock-modal" class="modal">
+        <div class="modal-content">
+            <h1>🎉 New Friend Unlocked! 🎉</h1>
+            <img id="unlock-image" src="" style="width:200px; height:200px; object-fit:contain;" alt="New Jellycat">
+            <h2 id="unlock-name"></h2>
+            <p>A Sky Dragon has joined the nursery!</p>
+            <button onclick="closeModal()" style="background:#a8e6cf; margin-top:15px;">Yay! Let's Snuggle</button>
+        </div>
+    </div>
+    
+    <!-- Shop Modal -->
+    <div id="shop-modal" class="modal">
+        <div class="modal-content">
+            <h1>🛍️ Jellycat Shop</h1>
+            <div style="margin:20px 0;">
+                <div style="display:flex; align-items:center; gap:15px; justify-content:center; margin:15px 0;">
+                    <img src="https://i.pinimg.com/736x/5f/7e/8f/5f7e8f0e5e5b0e5f5e5b0e5f5e5b0e5f.jpg" style="width:80px;" alt="Bear">
+                    <div>
+                        <strong>Bartholomew Bear</strong><br>
+                        <small>Already yours ❤️</small>
+                    </div>
+                </div>
+                <div id="dragon-shop-item" style="display:flex; align-items:center; gap:15px; justify-content:center; margin:15px 0; opacity:0.6;">
+                    <img src="https://i.pinimg.com/736x/34/60/e4/3460e44ffc8f23eef7eee132f4492caa.jpg" style="width:80px;" alt="Dragon">
+                    <div>
+                        <strong>Sky Dragon</strong><br>
+                        <small id="dragon-cost">Cost: 750 ⭐</small>
+                    </div>
+                </div>
+            </div>
+            <button onclick="closeShop()" style="background:#ff9ecd;">Close Shop</button>
+        </div>
+    </div>
+    
+    <script>
+        let stars = 0;
+        let totalTaps = 0;
+        let hasDragon = false;
+        let idleInterval;
+        let musicPlaying = false;
+        
+        const bearImg = document.getElementById('bear');
+        const dragonImg = document.getElementById('dragon');
+        const starCountEl = document.getElementById('stars');
+        
+        // Load saved progress
+        function loadProgress() {
+            const saved = localStorage.getItem('jellycatSnuggle');
+            if (saved) {
+                const data = JSON.parse(saved);
+                stars = data.stars || 0;
+                hasDragon = data.hasDragon || false;
+                if (hasDragon) {
+                    dragonImg.style.display = 'block';
+                }
+            }
+            updateStars();
+        }
+        
+        function saveProgress() {
+            localStorage.setItem('jellycatSnuggle', JSON.stringify({
+                stars: stars,
+                hasDragon: hasDragon
+            }));
+        }
+        
+        function updateStars() {
+            starCountEl.textContent = Math.floor(stars).toLocaleString();
+        }
+        
+        function createTapEffect(x, y, value) {
+            const effect = document.createElement('div');
+            effect.className = 'tap-effect';
+            effect.textContent = `+${value} ⭐`;
+            effect.style.left = `${x}px`;
+            effect.style.top = `${y}px`;
+            effect.style.color = '#ff9ecd';
+            document.getElementById('main-area').appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 1200);
+        }
+        
+        function tapCharacter(el) {
+            const rect = el.getBoundingClientRect();
+            const areaRect = document.getElementById('main-area').getBoundingClientRect();
+            
+            const tapX = (rect.left + rect.width/2) - areaRect.left;
+            const tapY = (rect.top + rect.height/3) - areaRect.top;
+            
+            let value = 1;
+            if (el.id === 'dragon') value = 2;
+            
+            stars += value;
+            totalTaps++;
+            
+            createTapEffect(tapX, tapY, value);
+            updateStars();
+            saveProgress();
+            
+            // Gentle animation
+            el.style.transform = 'scale(1.15)';
+            setTimeout(() => el.style.transform = 'scale(1)', 80);
+            
+            // Check for unlock
+            if (!hasDragon && stars >= 750) {
+                unlockDragon();
+            }
+        }
+        
+        function unlockDragon() {
+            hasDragon = true;
+            dragonImg.style.display = 'block';
+            saveProgress();
+            
+            const modal = document.getElementById('unlock-modal');
+            document.getElementById('unlock-image').src = dragonImg.src;
+            document.getElementById('unlock-name').textContent = 'Sky Dragon 🐉';
+            modal.style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('unlock-modal').style.display = 'none';
+        }
+        
+        function showShop() {
+            document.getElementById('shop-modal').style.display = 'flex';
+        }
+        
+        function closeShop() {
+            document.getElementById('shop-modal').style.display = 'none';
+        }
+        
+        function giveBigHug() {
+            stars += 25;
+            updateStars();
+            saveProgress();
+            
+            // Visual feedback
+            const area = document.getElementById('main-area');
+            area.style.transition = 'transform 0.3s';
+            area.style.transform = 'scale(1.03)';
+            setTimeout(() => area.style.transform = 'scale(1)', 300);
+            
+            alert("💕 Everyone got a big group hug! +25 Stars");
+        }
+        
+        function toggleMusic() {
+            musicPlaying = !musicPlaying;
+            if (musicPlaying) {
+                alert("🎵 Gentle lullaby music playing... (imagine soft plush sounds!)");
+            } else {
+                alert("🎵 Music paused");
+            }
+        }
+        
+        function resetGame() {
+            if (confirm("Reset all progress?")) {
+                stars = 0;
+                hasDragon = false;
+                dragonImg.style.display = 'none';
+                localStorage.removeItem('jellycatSnuggle');
+                updateStars();
+            }
+        }
+        
+        // Idle progression
+        function startIdle() {
+            idleInterval = setInterval(() => {
+                if (stars < 50000) { // cap for demo
+                    let idleRate = 8;
+                    if (hasDragon) idleRate += 12;
+                    stars += idleRate / 60; // per second simulation
+                    updateStars();
+                    saveProgress();
+                }
+            }, 1000);
+        }
+        
+        // Touch support improvements
+        function addTouchSupport() {
+            document.querySelectorAll('.character').forEach(char => {
+                char.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    tapCharacter(char);
+                });
+            });
+        }
+        
+        // Initialize
+        window.onload = function() {
+            loadProgress();
+            startIdle();
+            addTouchSupport();
+            
+            // Demo hint
+            if (stars < 100) {
+                setTimeout(() => {
+                    console.log("%c👋 Welcome to Jellycat Snuggle Tap! Tap the bear often!", "color:#ff9ecd; font-size:14px");
+                }, 800);
+            }
+        };
+    </script>
+</body>
+</html>
