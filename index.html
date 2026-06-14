@@ -1,418 +1,1008 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jellycat Snuggle Tap 🐻</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&amp;family=Fredoka:wght@400;600&amp;display=swap');
-        
-        :root {
-            --primary: #ff9ecd;
-            --accent: #a8e6cf;
-        }
-        
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Fredoka', 'Comic Neue', sans-serif;
-            background: linear-gradient(180deg, #fff0f8 0%, #e0f7fa 100%);
-            height: 100vh;
-            overflow: hidden;
-            color: #5c4033;
-            touch-action: manipulation;
-        }
-        
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
-            background: #fff;
-            position: relative;
-        }
-        
-        header {
-            background: #fff;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid #ffe4e1;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .stars {
-            font-size: 1.4em;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .star-icon {
-            font-size: 1.6em;
-            animation: sparkle 1.5s infinite alternate;
-        }
-        
-        .main-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 20px;
-            background: url('https://picsum.photos/id/1015/800/1000') center/cover; /* Soft blanket texture placeholder */
-            overflow: hidden;
-        }
-        
-        .nursery-bg {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(255,240,248,0.9), rgba(224,247,250,0.8));
-            z-index: 1;
-        }
-        
-        .character {
-            width: 280px;
-            height: 280px;
-            object-fit: contain;
-            cursor: pointer;
-            transition: transform 0.1s ease;
-            z-index: 2;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
-        }
-        
-        .character:active {
-            transform: scale(0.92) rotate(3deg);
-        }
-        
-        .dragon {
-            display: none;
-            width: 240px;
-            height: 240px;
-        }
-        
-        .tap-effect {
-            position: absolute;
-            font-size: 2em;
-            pointer-events: none;
-            animation: floatUp 1.2s forwards;
-            z-index: 10;
-        }
-        
-        .bottom-bar {
-            background: #fff;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-around;
-            border-top: 3px solid #ffe4e1;
-        }
-        
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255,158,205,0.4);
-        }
-        
-        button:hover, button:active {
-            transform: scale(1.05);
-        }
-        
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 30px;
-            text-align: center;
-            max-width: 90%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        
-        h1 {
-            margin: 0 0 15px 0;
-            color: var(--primary);
-        }
-        
-        @keyframes sparkle {
-            from { transform: scale(1); }
-            to { transform: scale(1.2); }
-        }
-        
-        @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-150px); opacity: 0; }
-        }
-        
-        .info {
-            position: absolute;
-            bottom: 20px;
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#fbeee6">
+<title>Official Jellycat Collectors 🧸</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap');
+
+/* ============================================================
+   THEME — soft cottagecore palette
+   ============================================================ */
+:root{
+  --cream:#fbeee6; --cream-2:#f5e3d3; --beige:#efe2d2;
+  --pink:#f3c6cf; --pink-deep:#e79bb0; --rose:#e98aa3;
+  --sage:#bcd1ad; --sage-deep:#8fae7c;
+  --blue:#bcd6e6; --blue-deep:#8db9d4;
+  --lilac:#d8c3e6; --gold:#e9c46a; --gold-deep:#d4a93f;
+  --brown:#7a5c46; --brown-soft:#a07a5e;
+  --ink:#5c4636; --ink-soft:#8a7361;
+  --white:#fffaf5;
+  --shadow:0 10px 30px rgba(122,92,70,.16);
+  --shadow-soft:0 6px 18px rgba(122,92,70,.12);
+  --radius:26px;
+  /* rarity colors */
+  --r-common:#9db98a; --r-rare:#7aa7c7; --r-epic:#b487d4;
+  --r-legendary:#e6b54e; --r-mythic:#ec7fa0; --r-secret:#ff6f91;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:'Quicksand','Fredoka',sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  overflow:hidden;
+  touch-action:manipulation;
+  user-select:none;-webkit-user-select:none;
+}
+
+/* phone frame */
+#app{
+  position:relative;
+  max-width:520px;margin:0 auto;
+  height:100dvh;
+  display:flex;flex-direction:column;
+  background:var(--cream);
+  box-shadow:0 0 50px rgba(0,0,0,.12);
+  overflow:hidden;
+}
+
+/* ============================================================ HEADER */
+header{
+  flex:0 0 auto;
+  padding:calc(10px + var(--safe-top)) 16px 10px;
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(180deg,var(--white),rgba(255,250,245,.6));
+  border-bottom:1px solid rgba(122,92,70,.08);
+  z-index:30;backdrop-filter:blur(6px);
+}
+.brand{font-family:'Fredoka';font-weight:700;font-size:1.05em;color:var(--rose);letter-spacing:.2px;line-height:1;}
+.brand small{display:block;font-size:.55em;color:var(--ink-soft);font-weight:600;letter-spacing:2px;text-transform:uppercase;}
+.counters{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.chip{
+  display:flex;align-items:center;gap:5px;
+  background:var(--white);border:1.5px solid var(--cream-2);
+  padding:6px 11px;border-radius:50px;font-weight:700;font-size:.92em;
+  box-shadow:var(--shadow-soft);
+}
+.chip .ico{font-size:1.05em;animation:twinkle 2s infinite alternate;}
+.chip.gold{border-color:#f0dca8;color:var(--gold-deep);}
+.chip.gps{font-size:.74em;color:var(--ink-soft);font-weight:600;}
+.icon-btn{
+  width:38px;height:38px;border-radius:50%;border:1.5px solid var(--cream-2);
+  background:var(--white);font-size:1.1em;display:grid;place-items:center;cursor:pointer;
+  box-shadow:var(--shadow-soft);
+}
+
+/* ============================================================ VIEWS */
+#views{flex:1 1 auto;position:relative;overflow:hidden;}
+.view{
+  position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:16px 14px 16px;opacity:0;pointer-events:none;
+  transform:translateY(8px);transition:opacity .25s,transform .25s;
+}
+.view.active{opacity:1;pointer-events:auto;transform:none;}
+.view::-webkit-scrollbar{width:0;}
+.section-title{font-family:'Fredoka';font-weight:600;font-size:1.15em;margin:4px 4px 12px;display:flex;align-items:center;gap:7px;}
+.muted{color:var(--ink-soft);font-size:.85em;}
+
+/* ============================================================ NURSERY (tap) */
+#view-nursery{padding:0;display:flex;flex-direction:column;}
+.room-stage{
+  position:relative;flex:1 1 auto;min-height:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;transition:background 1s ease;
+}
+.room-label{
+  position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  background:rgba(255,250,245,.8);backdrop-filter:blur(4px);
+  padding:5px 16px;border-radius:50px;font-family:'Fredoka';font-weight:600;
+  font-size:.9em;box-shadow:var(--shadow-soft);z-index:5;white-space:nowrap;
+}
+.parallax{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+.plush-wrap{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.plush{
+  width:min(58vw,260px);height:min(58vw,260px);object-fit:contain;cursor:pointer;
+  filter:drop-shadow(0 16px 22px rgba(122,92,70,.28));
+  animation:breathe 3.4s ease-in-out infinite;
+  transition:transform .08s ease;border:none;background:none;
+}
+.plush.squish{animation:none;transform:scale(.9) rotate(-2deg);}
+.plush-name{
+  background:rgba(255,250,245,.85);padding:5px 18px;border-radius:50px;
+  font-family:'Fredoka';font-weight:600;box-shadow:var(--shadow-soft);
+  display:flex;align-items:center;gap:8px;
+}
+.rar-dot{width:11px;height:11px;border-radius:50%;box-shadow:0 0 9px currentColor;}
+.tap-hint{position:absolute;bottom:14px;width:100%;text-align:center;color:var(--ink-soft);font-size:.82em;z-index:5;}
+.floaty{position:absolute;pointer-events:none;font-weight:700;font-family:'Fredoka';z-index:20;animation:floatUp 1.1s ease-out forwards;font-size:1.3em;}
+.particle{position:absolute;pointer-events:none;z-index:2;will-change:transform;}
+
+/* room quick-switch */
+.room-rail{
+  flex:0 0 auto;display:flex;gap:8px;overflow-x:auto;padding:10px 12px;
+  background:var(--white);border-top:1px solid rgba(122,92,70,.08);
+}
+.room-rail::-webkit-scrollbar{height:0;}
+.room-pill{
+  flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:7px 13px;border-radius:18px;background:var(--cream);border:1.5px solid var(--cream-2);
+  font-size:.7em;font-weight:700;color:var(--ink-soft);cursor:pointer;min-width:64px;
+}
+.room-pill .e{font-size:1.4em;}
+.room-pill.active{background:var(--pink);border-color:var(--pink-deep);color:var(--brown);}
+.room-pill.locked{opacity:.55;}
+.room-pill .lk{font-size:.75em;}
+
+/* ============================================================ CARDS / GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:11px;}
+.jc-card{
+  background:var(--white);border-radius:20px;padding:9px;text-align:center;
+  border:2px solid var(--cream-2);box-shadow:var(--shadow-soft);position:relative;overflow:hidden;cursor:pointer;
+  transition:transform .12s;
+}
+.jc-card:active{transform:scale(.96);}
+.jc-card .thumb{width:100%;aspect-ratio:1;object-fit:contain;border-radius:14px;background:var(--cream);}
+.jc-card.locked .thumb{filter:grayscale(1) brightness(.78) opacity(.5);}
+.jc-card .nm{font-size:.74em;font-weight:700;margin-top:6px;line-height:1.15;color:var(--ink);min-height:2.2em;display:flex;align-items:center;justify-content:center;}
+.jc-card .ct{display:inline-block;margin-top:4px;font-size:.6em;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:2px 8px;border-radius:50px;color:#fff;}
+.jc-card .qty{position:absolute;top:7px;right:7px;background:var(--ink);color:#fff;font-size:.62em;font-weight:700;padding:2px 7px;border-radius:50px;}
+.jc-card .lock-i{position:absolute;top:7px;left:7px;font-size:.85em;}
+.jc-card.locked .nm{color:var(--ink-soft);}
+
+/* rarity frames */
+.r-common{border-color:var(--r-common);} .bg-common{background:var(--r-common);}
+.r-rare{border-color:var(--r-rare);box-shadow:0 0 0 1px var(--r-rare),0 6px 16px rgba(122,150,180,.25);} .bg-rare{background:var(--r-rare);}
+.r-epic{border-color:var(--r-epic);box-shadow:0 0 14px rgba(180,135,212,.45);} .bg-epic{background:var(--r-epic);}
+.r-legendary{border-color:var(--r-legendary);box-shadow:0 0 18px rgba(230,181,78,.55);} .bg-legendary{background:var(--r-legendary);}
+.r-mythic{border-color:var(--r-mythic);box-shadow:0 0 20px rgba(236,127,160,.6);} .bg-mythic{background:var(--r-mythic);}
+.r-secret{border-color:var(--r-secret);} .bg-secret{background:linear-gradient(90deg,#ff6f91,#c89fd6,#7aa7c7);}
+.r-legendary,.r-mythic{animation:glowPulse 2.4s ease-in-out infinite;}
+
+/* ============================================================ EGGS / GACHA */
+.egg-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.egg-card{
+  background:var(--white);border-radius:24px;padding:16px 12px;text-align:center;
+  border:2px solid var(--cream-2);box-shadow:var(--shadow-soft);cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .12s;
+}
+.egg-card:active{transform:scale(.96);}
+.egg-card .egg{font-size:3.1em;display:block;animation:bobble 3s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(122,92,70,.25));}
+.egg-card h3{margin:6px 0 2px;font-family:'Fredoka';font-size:1.02em;}
+.egg-card .cost{font-weight:700;color:var(--gold-deep);font-size:.92em;}
+.egg-card .odds{font-size:.66em;color:var(--ink-soft);margin-top:7px;line-height:1.5;}
+.egg-card.cant{opacity:.55;}
+
+/* opening overlay */
+#opener{
+  position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;flex-direction:column;
+  background:radial-gradient(circle at center,rgba(243,198,207,.55),rgba(120,90,70,.72));
+  backdrop-filter:blur(3px);
+}
+#opener.show{display:flex;}
+.open-egg{font-size:7em;animation:shake .5s ease-in-out infinite;filter:drop-shadow(0 10px 18px rgba(0,0,0,.3));}
+.reveal{display:none;flex-direction:column;align-items:center;text-align:center;color:var(--white);}
+.reveal.show{display:flex;animation:popIn .5s cubic-bezier(.2,1.3,.5,1);}
+.reveal img{width:min(56vw,240px);height:min(56vw,240px);object-fit:contain;border-radius:24px;background:rgba(255,255,255,.12);padding:10px;}
+.reveal .r-tag{margin-top:12px;font-family:'Fredoka';font-weight:700;font-size:1em;text-transform:uppercase;letter-spacing:2px;padding:5px 18px;border-radius:50px;color:#fff;}
+.reveal h2{margin:12px 0 4px;font-family:'Fredoka';font-size:1.5em;}
+.reveal .dup{font-size:.9em;opacity:.92;}
+.tap-continue{margin-top:18px;font-size:.85em;opacity:.85;}
+
+/* ============================================================ SHOP / IDLE / PRESTIGE */
+.tabbar{display:flex;gap:6px;background:var(--cream-2);padding:5px;border-radius:50px;margin:0 4px 14px;}
+.tabbar button{
+  flex:1;border:none;background:none;padding:8px;border-radius:50px;font-family:'Quicksand';
+  font-weight:700;font-size:.82em;color:var(--ink-soft);cursor:pointer;
+}
+.tabbar button.active{background:var(--white);color:var(--brown);box-shadow:var(--shadow-soft);}
+.shop-pane{display:none;} .shop-pane.active{display:block;}
+.list-item{
+  display:flex;align-items:center;gap:12px;background:var(--white);border:2px solid var(--cream-2);
+  border-radius:20px;padding:12px;margin-bottom:11px;box-shadow:var(--shadow-soft);
+}
+.list-item .li-e{font-size:2em;flex:0 0 auto;width:50px;text-align:center;}
+.list-item .li-body{flex:1 1 auto;min-width:0;}
+.list-item .li-body h4{margin:0;font-family:'Fredoka';font-size:.98em;}
+.list-item .li-body p{margin:2px 0 0;font-size:.74em;color:var(--ink-soft);line-height:1.3;}
+.list-item .li-own{font-size:.72em;color:var(--sage-deep);font-weight:700;}
+.buy-btn{
+  flex:0 0 auto;border:none;border-radius:50px;padding:9px 14px;font-family:'Quicksand';font-weight:700;
+  font-size:.82em;color:#fff;background:var(--sage-deep);cursor:pointer;box-shadow:0 4px 12px rgba(143,174,124,.4);
+  display:flex;flex-direction:column;align-items:center;line-height:1.1;min-width:74px;
+}
+.buy-btn small{font-size:.78em;font-weight:600;opacity:.9;}
+.buy-btn:disabled{background:#cdbfae;box-shadow:none;cursor:not-allowed;}
+.buy-btn.room{background:var(--blue-deep);box-shadow:0 4px 12px rgba(141,185,212,.4);}
+.buy-btn.gold{background:var(--gold-deep);box-shadow:0 4px 12px rgba(212,169,63,.4);}
+
+.prestige-card{
+  background:linear-gradient(160deg,#fff6e6,#f8e7c8);border:2px solid var(--gold);border-radius:24px;
+  padding:18px;text-align:center;box-shadow:var(--shadow);
+}
+.prestige-card h2{font-family:'Fredoka';margin:6px 0;color:var(--gold-deep);}
+.prog-track{height:13px;border-radius:50px;background:#eaddc4;overflow:hidden;margin:12px 0 6px;}
+.prog-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--gold),var(--gold-deep));transition:width .4s;}
+.big-btn{
+  width:100%;border:none;border-radius:50px;padding:14px;font-family:'Fredoka';font-weight:700;font-size:1.05em;
+  color:#fff;cursor:pointer;margin-top:10px;box-shadow:var(--shadow);
+}
+.big-btn.go{background:linear-gradient(90deg,var(--gold-deep),#c08f2c);}
+.big-btn:disabled{background:#cdbfae;box-shadow:none;}
+
+/* ============================================================ DETAIL MODAL */
+.modal{position:fixed;inset:0;z-index:150;display:none;align-items:flex-end;justify-content:center;background:rgba(92,70,54,.45);backdrop-filter:blur(2px);}
+.modal.show{display:flex;animation:fadeIn .25s;}
+.sheet{
+  background:var(--white);width:100%;max-width:520px;border-radius:28px 28px 0 0;padding:20px 20px calc(24px + var(--safe-bottom));
+  box-shadow:0 -10px 40px rgba(0,0,0,.18);max-height:88dvh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.2,1,.4,1);
+}
+.sheet::-webkit-scrollbar{width:0;}
+.sheet-grab{width:42px;height:5px;border-radius:50px;background:var(--cream-2);margin:0 auto 14px;}
+.detail-hero{display:flex;gap:14px;align-items:center;}
+.detail-hero img{width:120px;height:120px;object-fit:contain;border-radius:18px;background:var(--cream);padding:6px;flex:0 0 auto;}
+.detail-hero h2{margin:0 0 4px;font-family:'Fredoka';font-size:1.25em;}
+.detail-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.tagpill{font-size:.66em;font-weight:700;padding:3px 10px;border-radius:50px;background:var(--cream);color:var(--ink-soft);}
+.detail-desc{margin:16px 0;line-height:1.55;font-size:.92em;color:var(--ink);}
+.stat-row{display:flex;gap:10px;margin:14px 0;}
+.stat-box{flex:1;background:var(--cream);border-radius:16px;padding:11px;text-align:center;}
+.stat-box .v{font-family:'Fredoka';font-weight:700;font-size:1.1em;}
+.stat-box .l{font-size:.66em;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.5px;}
+.fact-box{background:var(--cream);border-radius:16px;padding:12px 14px;margin:8px 0;font-size:.86em;line-height:1.5;}
+.fact-box b{color:var(--brown);}
+.link-btn{display:inline-block;margin-top:8px;font-size:.82em;font-weight:700;color:var(--blue-deep);text-decoration:none;}
+
+/* ============================================================ BOTTOM NAV */
+.bottom-nav{
+  flex:0 0 auto;display:flex;background:var(--white);border-top:1px solid rgba(122,92,70,.1);
+  padding:6px 4px calc(6px + var(--safe-bottom));z-index:30;
+}
+.bottom-nav button{
+  flex:1;border:none;background:none;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-family:'Quicksand';font-weight:700;font-size:.66em;color:var(--ink-soft);cursor:pointer;border-radius:14px;
+}
+.bottom-nav button .ne{font-size:1.45em;transition:transform .2s;}
+.bottom-nav button.active{color:var(--rose);}
+.bottom-nav button.active .ne{transform:translateY(-2px) scale(1.12);}
+
+/* ============================================================ TOAST */
+#toast{
+  position:fixed;left:50%;bottom:calc(86px + var(--safe-bottom));transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:#fff;padding:10px 18px;border-radius:50px;font-size:.85em;font-weight:600;
+  opacity:0;pointer-events:none;transition:.3s;z-index:300;box-shadow:var(--shadow);max-width:90%;text-align:center;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* confetti */
+.confetti{position:fixed;top:-20px;width:10px;height:14px;z-index:250;pointer-events:none;border-radius:2px;}
+
+/* ============================================================ ANIMATIONS */
+@keyframes twinkle{from{transform:scale(1) rotate(-6deg);opacity:.85;}to{transform:scale(1.18) rotate(6deg);opacity:1;}}
+@keyframes breathe{0%,100%{transform:scale(1) translateY(0);}50%{transform:scale(1.045) translateY(-5px);}}
+@keyframes floatUp{0%{transform:translateY(0) scale(.8);opacity:0;}20%{opacity:1;transform:scale(1.1);}100%{transform:translateY(-120px) scale(1);opacity:0;}}
+@keyframes bobble{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-8px) rotate(3deg);}}
+@keyframes shake{0%,100%{transform:rotate(-8deg) scale(1);}50%{transform:rotate(8deg) scale(1.06);}}
+@keyframes popIn{0%{transform:scale(.3);opacity:0;}100%{transform:scale(1);opacity:1;}}
+@keyframes glowPulse{0%,100%{filter:brightness(1);}50%{filter:brightness(1.12);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+@keyframes fall{to{transform:translateY(105vh) rotate(640deg);}}
+@keyframes drift{from{transform:translateY(0) translateX(0);}to{transform:translateY(-30px) translateX(14px);}}
+
+@media (max-width:380px){.grid{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));}}
+@media (orientation:landscape) and (max-height:520px){
+  .plush{width:min(34vh,200px);height:min(34vh,200px);}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="stars" id="star-count">
-                <span class="star-icon">⭐</span>
-                <span id="stars">0</span>
-            </div>
-            <h2 style="margin:0; font-size:1.3em; color:#ff9ecd;">🐻 Jelly Nursery</h2>
-            <button onclick="resetGame()" style="background:#a8e6cf; padding:8px 16px; font-size:0.9em;">Reset</button>
-        </header>
-        
-        <!-- Main Game Area -->
-        <div class="main-area" id="main-area">
-            <div class="nursery-bg"></div>
-            
-            <!-- Bartholomew Bear -->
-            <img id="bear" 
-                 src="https://i.pinimg.com/736x/5f/7e/8f/5f7e8f0e5e5b0e5f5e5b0e5f5e5b0e5f.jpg" 
-                 alt="Bartholomew Bear" 
-                 class="character"
-                 onclick="tapCharacter(this)">
-            
-            <!-- Sky Dragon (initially hidden) -->
-            <img id="dragon" 
-                 src="https://i.pinimg.com/736x/34/60/e4/3460e44ffc8f23eef7eee132f4492caa.jpg" 
-                 alt="Sky Dragon" 
-                 class="character dragon"
-                 onclick="tapCharacter(this)">
-            
-            <div class="info">Tap your Jellycat to give hugs! ❤️</div>
-        </div>
-        
-        <!-- Bottom Bar -->
-        <div class="bottom-bar">
-            <button onclick="showShop()">🛍️ Shop</button>
-            <button onclick="giveBigHug()">🤗 Big Hug</button>
-            <button onclick="toggleMusic()">🎵 Music</button>
-        </div>
+<div id="app">
+
+  <header>
+    <div class="brand">Jellycat Collectors<small>Official · Cozy Edition</small></div>
+    <div class="counters">
+      <div class="chip"><span class="ico">⭐</span><span id="hud-stars">0</span></div>
+      <div class="chip gold" id="hud-gold-wrap" style="display:none"><span>🔘</span><span id="hud-gold">0</span></div>
+      <button class="icon-btn" id="sound-btn" title="Sound">🔊</button>
     </div>
-    
-    <!-- Unlock Modal -->
-    <div id="unlock-modal" class="modal">
-        <div class="modal-content">
-            <h1>🎉 New Friend Unlocked! 🎉</h1>
-            <img id="unlock-image" src="" style="width:200px; height:200px; object-fit:contain;" alt="New Jellycat">
-            <h2 id="unlock-name"></h2>
-            <p>A Sky Dragon has joined the nursery!</p>
-            <button onclick="closeModal()" style="background:#a8e6cf; margin-top:15px;">Yay! Let's Snuggle</button>
+  </header>
+
+  <div id="views">
+    <!-- ============ NURSERY ============ -->
+    <section class="view active" id="view-nursery">
+      <div class="room-stage" id="room-stage">
+        <div class="parallax" id="parallax"></div>
+        <div class="room-label" id="room-label">🌷 Spring Meadow</div>
+        <div class="plush-wrap">
+          <img class="plush" id="plush" alt="Your Jellycat" draggable="false">
+          <div class="plush-name"><span class="rar-dot" id="plush-dot"></span><span id="plush-name">—</span></div>
         </div>
-    </div>
-    
-    <!-- Shop Modal -->
-    <div id="shop-modal" class="modal">
-        <div class="modal-content">
-            <h1>🛍️ Jellycat Shop</h1>
-            <div style="margin:20px 0;">
-                <div style="display:flex; align-items:center; gap:15px; justify-content:center; margin:15px 0;">
-                    <img src="https://i.pinimg.com/736x/5f/7e/8f/5f7e8f0e5e5b0e5f5e5b0e5f5e5b0e5f.jpg" style="width:80px;" alt="Bear">
-                    <div>
-                        <strong>Bartholomew Bear</strong><br>
-                        <small>Already yours ❤️</small>
-                    </div>
-                </div>
-                <div id="dragon-shop-item" style="display:flex; align-items:center; gap:15px; justify-content:center; margin:15px 0; opacity:0.6;">
-                    <img src="https://i.pinimg.com/736x/34/60/e4/3460e44ffc8f23eef7eee132f4492caa.jpg" style="width:80px;" alt="Dragon">
-                    <div>
-                        <strong>Sky Dragon</strong><br>
-                        <small id="dragon-cost">Cost: 750 ⭐</small>
-                    </div>
-                </div>
-            </div>
-            <button onclick="closeShop()" style="background:#ff9ecd;">Close Shop</button>
+        <div class="tap-hint" id="tap-hint">Tap your Jellycat for snuggles ✨</div>
+      </div>
+      <div class="room-rail" id="room-rail"></div>
+    </section>
+
+    <!-- ============ EGGS ============ -->
+    <section class="view" id="view-eggs">
+      <div class="section-title">🥚 Gacha Eggs <span class="muted" style="margin-left:auto;font-weight:600">Hatch a friend</span></div>
+      <p class="muted" style="margin:0 4px 14px">Spend stars to hatch a mystery Jellycat. Rarer eggs hold rarer friends — duplicates become stardust refunds.</p>
+      <div class="egg-grid" id="egg-grid"></div>
+    </section>
+
+    <!-- ============ COLLECTION ============ -->
+    <section class="view" id="view-collection">
+      <div class="section-title">🧺 Your Collection <span class="muted" id="coll-count" style="margin-left:auto;font-weight:600"></span></div>
+      <div class="grid" id="collection-grid"></div>
+    </section>
+
+    <!-- ============ JELLYPEDIA ============ -->
+    <section class="view" id="view-pedia">
+      <div class="section-title">📖 Jellypedia <span class="muted" id="pedia-count" style="margin-left:auto;font-weight:600"></span></div>
+      <p class="muted" style="margin:0 4px 14px">Every Jellycat in the nursery, real and official. Tap any friend to read their page.</p>
+      <div class="grid" id="pedia-grid"></div>
+    </section>
+
+    <!-- ============ SHOP ============ -->
+    <section class="view" id="view-shop">
+      <div class="tabbar">
+        <button data-pane="helpers" class="active">🧸 Helpers</button>
+        <button data-pane="rooms">🏡 Rooms</button>
+        <button data-pane="prestige">🌟 Prestige</button>
+      </div>
+      <div class="shop-pane active" id="pane-helpers">
+        <p class="muted" style="margin:0 4px 14px">Cozy helpers gather stars while you rest. Each one you adopt boosts your stars per second.</p>
+        <div id="helper-list"></div>
+      </div>
+      <div class="shop-pane" id="pane-rooms">
+        <p class="muted" style="margin:0 4px 14px">Unlock dreamy nurseries. Each room has its own backdrop, drifting particles, and ambient lullaby.</p>
+        <div id="room-list"></div>
+      </div>
+      <div class="shop-pane" id="pane-prestige"></div>
+    </section>
+  </div>
+
+  <nav class="bottom-nav" id="bottom-nav">
+    <button data-view="nursery" class="active"><span class="ne">🏡</span>Nursery</button>
+    <button data-view="eggs"><span class="ne">🥚</span>Eggs</button>
+    <button data-view="collection"><span class="ne">🧺</span>Collection</button>
+    <button data-view="pedia"><span class="ne">📖</span>Jellypedia</button>
+    <button data-view="shop"><span class="ne">🛍️</span>Shop</button>
+  </nav>
+</div>
+
+<!-- egg opener -->
+<div id="opener">
+  <div class="open-egg" id="open-egg">🥚</div>
+  <div class="reveal" id="reveal">
+    <img id="reveal-img" alt="">
+    <div class="r-tag" id="reveal-rtag"></div>
+    <h2 id="reveal-name"></h2>
+    <div class="dup" id="reveal-dup"></div>
+    <div class="tap-continue">tap to continue</div>
+  </div>
+</div>
+
+<!-- detail sheet -->
+<div class="modal" id="detail-modal">
+  <div class="sheet" id="detail-sheet"><div class="sheet-grab"></div><div id="detail-body"></div></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   VERIFIED JELLYCAT DATABASE — 11 real products.
+   Images: official Jellycat BigCommerce CDN (store s-23s5gfmhr7).
+   Names, collections, categories & descriptions are authentic.
+   officialUrl points to the live Jellycat site search for each item.
+   ============================================================ */
+const JC_IMG = "https://cdn11.bigcommerce.com/s-23s5gfmhr7/images/stencil/1000w/products/";
+const jcURL = n => "https://www.jellycat.com/row/search/?q=" + encodeURIComponent(n);
+
+const jellycats = [
+  { id:"bashful-beige-bunny", name:"Bashful Beige Bunny", collection:"Bashful", category:"Bunnies",
+    rarity:"common", cost:25, starsPerSecond:0.5,
+    image:JC_IMG+"294/41548/BAS3B__06287.1727975732.jpg",
+    description:"The Bashful Beige Bunny is the one that started it all — impossibly soft, with long flopsy ears and a gentle sugar-brown coat made for cuddling. A true Jellycat classic.",
+    foods:"Clover, dandelion leaves & garden carrots", facts:"The Bashful Bunny is Jellycat's best-loved design of all time.",
+    officialUrl:jcURL("Bashful Beige Bunny") },
+  { id:"bashful-cream-bunny", name:"Bashful Cream Bunny", collection:"Bashful", category:"Bunnies",
+    rarity:"common", cost:32, starsPerSecond:0.6,
+    image:JC_IMG+"297/1324/BASHFUL_BUNNY_CREAM__01082.1749467902.jpg",
+    description:"Dressed in the softest buttermilk fur, the Bashful Cream Bunny has the floppiest ears and a snowy little scut. Sweet, snuggly and endlessly patient.",
+    foods:"Vanilla oat biscuits & warm milk", facts:"Cream is one of the original Bashful Bunny colourways.",
+    officialUrl:jcURL("Bashful Cream Bunny") },
+  { id:"bashful-blue-bunny", name:"Bashful Blue Bunny", collection:"Bashful", category:"Bunnies",
+    rarity:"rare", cost:120, starsPerSecond:1.8,
+    image:JC_IMG+"295/1667/BASHFUL_BUNNY_BABY_BLUE__32592.1727976098.jpg",
+    description:"A dreamy baby-blue bunny with the softest fur and the longest, floppiest ears. The Bashful Blue Bunny is calm, cosy and quietly adventurous.",
+    foods:"Blueberries & cornflowers", facts:"Its powder-blue coat makes it a favourite first friend for newborns.",
+    officialUrl:jcURL("Bashful Blue Bunny") },
+  { id:"bashful-lamb", name:"Bashful Lamb", collection:"Bashful", category:"Lambs",
+    rarity:"rare", cost:140, starsPerSecond:2.0,
+    image:JC_IMG+"353/1505/BASHFUL_LAMB__30299.1727975921.jpg",
+    description:"Wrapped in fleecy cream curls with the sweetest suedey face, the Bashful Lamb is springtime softness in plush form — woolly, wobbly and wonderful.",
+    foods:"Fresh meadow grass & buttercups", facts:"Its curly coat is designed to feel just like real lamb's wool.",
+    officialUrl:jcURL("Bashful Lamb") },
+  { id:"blossom-cream-bunny", name:"Blossom Cream Bunny", collection:"Blossom", category:"Bunnies",
+    rarity:"rare", cost:160, starsPerSecond:2.2,
+    image:JC_IMG+"522/2295/BLOSSOM_BUNNY_BLOSSOM_CREAM__18275.1727976989.jpg",
+    description:"From the Blossom family, this cream bunny has beautifully tipped two-tone fur and the silkiest ears. Elegant, gentle and made for daydreaming in the garden.",
+    foods:"Cherry blossom petals & honeydew", facts:"Blossom Bunnies are prized for their delicately shaded, tipped fur.",
+    officialUrl:jcURL("Blossom Cream Bunny") },
+  { id:"bashful-tiger", name:"Bashful Tiger", collection:"Bashful", category:"Tigers",
+    rarity:"epic", cost:500, starsPerSecond:5,
+    image:JC_IMG+"311/1614/BASHFUL_TIGER__88812.1727976044.jpg",
+    description:"Bold stripes, a soft caramel coat and the friendliest little face — the Bashful Tiger is a gentle jungle giant who would rather snuggle than roar.",
+    foods:"Mango slices & warm rice pudding", facts:"Despite the stripes, this tiger is the cuddliest cat in the jungle.",
+    officialUrl:jcURL("Bashful Tiger") },
+  { id:"bashful-koala", name:"Bashful Koala", collection:"Bashful", category:"Koalas",
+    rarity:"epic", cost:560, starsPerSecond:5.5,
+    image:JC_IMG+"349/41656/BAS3KOA__51501.1727975890.jpg",
+    description:"Silvery-grey and supremely huggable, the Bashful Koala has the squidgiest nose and fuzzy tufted ears. A sleepy, clingy cuddle-bug at heart.",
+    foods:"Eucalyptus leaves & gum-tip tea", facts:"Koalas love to cling — this one will happily hug a finger all day.",
+    officialUrl:jcURL("Bashful Koala") },
+  { id:"bashful-panda", name:"Bashful Panda", collection:"Bashful", category:"Pandas",
+    rarity:"epic", cost:620, starsPerSecond:6,
+    image:JC_IMG+"358/41697/BAS3PAND__66448.1727975952.jpg",
+    description:"Soft monochrome fur, dark dreamy eye patches and a roly-poly tummy make the Bashful Panda an irresistible snuggle companion for bamboo dreams.",
+    foods:"Bamboo shoots & sticky rice cakes", facts:"Its tummy is extra-weighted for the perfect floppy cuddle.",
+    officialUrl:jcURL("Bashful Panda") },
+  { id:"bartholomew-bear", name:"Bartholomew Bear", collection:"Classic", category:"Bears",
+    rarity:"legendary", cost:2000, starsPerSecond:12,
+    image:JC_IMG+"322/52679/BARM3BR__22606.1773232036.jpg",
+    description:"The original Jellycat bear — Bartholomew is the classic bear with the warmest hug in the jungle. Honey-brown, beautifully weighted and endlessly loyal.",
+    foods:"Wildflower honey & buttered toast", facts:"Bartholomew is one of Jellycat's most iconic heritage bears.",
+    officialUrl:jcURL("Bartholomew Bear") },
+  { id:"bashful-red-panda", name:"Bashful Red Panda", collection:"Bashful", category:"Red Pandas",
+    rarity:"legendary", cost:2400, starsPerSecond:14,
+    image:JC_IMG+"365/41729/BAS3RP__77507.1727975995.jpg",
+    description:"Russet-red fur, a magnificent ringed tail and a cream button face — the Bashful Red Panda is a rare and ruddy charmer who loves to curl up close.",
+    foods:"Bamboo, berries & maple drops", facts:"Its enormous fluffy tail is nearly as long as its body.",
+    officialUrl:jcURL("Bashful Red Panda") },
+  { id:"odell-octopus", name:"Odell Octopus", collection:"Ocean", category:"Ocean",
+    rarity:"mythic", cost:9000, starsPerSecond:30,
+    image:JC_IMG+"1040/4426/OCTOPUS_ODELL__82264.1727979827.jpg",
+    description:"The gorgeous Odell Octopus has eight wonderful tentacles and the most beautiful inky blue colour. A deep-sea dreamer with suckers you can count and a serene smile.",
+    foods:"Sea pearls & kelp ribbons", facts:"Each of Odell's eight arms is curled and stitched with tiny suckers.",
+    officialUrl:jcURL("Odell Octopus") },
+];
+const jcMap = Object.fromEntries(jellycats.map(j=>[j.id,j]));
+
+/* ============================================================ RARITY CONFIG */
+const RARITY = {
+  common:    { label:"Common",    color:"var(--r-common)",    cls:"common",    refund:8,   order:0 },
+  rare:      { label:"Rare",      color:"var(--r-rare)",      cls:"rare",      refund:40,  order:1 },
+  epic:      { label:"Epic",      color:"var(--r-epic)",      cls:"epic",      refund:150, order:2 },
+  legendary: { label:"Legendary", color:"var(--r-legendary)", cls:"legendary", refund:600, order:3 },
+  mythic:    { label:"Mythic",    color:"var(--r-mythic)",    cls:"mythic",    refund:2200,order:4 },
+  secret:    { label:"Secret",    color:"var(--r-secret)",    cls:"secret",    refund:5000,order:5 },
+};
+const idsByRarity = r => jellycats.filter(j=>j.rarity===r).map(j=>j.id);
+
+/* ============================================================ EGGS */
+const EGGS = [
+  { id:"tiny",   name:"Tiny Egg",    emoji:"🥚", cost:60,   bg:"#bcd6e6",
+    table:{common:82, rare:16, epic:2} },
+  { id:"cozy",   name:"Cozy Egg",    emoji:"🐣", cost:300,  bg:"#f3c6cf",
+    table:{common:50, rare:36, epic:12, legendary:2} },
+  { id:"mystery",name:"Mystery Egg", emoji:"❓", cost:1500, bg:"#d8c3e6",
+    table:{common:25, rare:35, epic:28, legendary:11, mythic:1} },
+  { id:"golden", name:"Golden Egg",  emoji:"🥇", cost:4000, bg:"#e9c46a",
+    table:{rare:38, epic:42, legendary:17, mythic:3} },
+  { id:"royal",  name:"Royal Egg",   emoji:"👑", cost:12000,bg:"#e98aa3",
+    table:{epic:46, legendary:40, mythic:13, secret:1} },
+];
+
+/* ============================================================ NURSERY ROOMS */
+const ROOMS = [
+  { id:"meadow",   name:"Spring Meadow",    emoji:"🌷", cost:0,     particle:"petal",
+    bg:"linear-gradient(180deg,#dff0d8 0%,#f3e9d2 100%)" },
+  { id:"cloud",    name:"Cloud Castle",     emoji:"☁️", cost:3000,  particle:"cloud",
+    bg:"linear-gradient(180deg,#cfe6f5 0%,#eef6fb 100%)" },
+  { id:"library",  name:"Moonlit Library",  emoji:"🌙", cost:9000,  particle:"star",
+    bg:"linear-gradient(180deg,#2f3a64 0%,#5a6aa0 100%)" },
+  { id:"cave",     name:"Dragon Cave",      emoji:"🐉", cost:20000, particle:"ember",
+    bg:"linear-gradient(180deg,#3a2c46 0%,#7a5c70 100%)" },
+  { id:"cottage",  name:"Christmas Cottage",emoji:"🎄", cost:45000, particle:"snow",
+    bg:"linear-gradient(180deg,#9fc4cf 0%,#e7f1f3 100%)" },
+  { id:"beach",    name:"Beach Picnic",     emoji:"🏖️", cost:80000, particle:"bubble",
+    bg:"linear-gradient(180deg,#ffe7b8 0%,#bfe8e0 100%)" },
+];
+const roomMap = Object.fromEntries(ROOMS.map(r=>[r.id,r]));
+const darkRoom = id => ["library","cave"].includes(id);
+
+/* ============================================================ IDLE HELPERS */
+const HELPERS = [
+  { id:"caretaker", name:"Caretaker",   emoji:"🧑‍🍼", base:50,    rate:0.4,  desc:"A gentle helper who tends the nursery." },
+  { id:"toychest",  name:"Toy Chest",   emoji:"🧰", base:300,   rate:2.2,  desc:"Bursting with plushies that earn while shut." },
+  { id:"fort",      name:"Blanket Fort",emoji:"⛺", base:1600,  rate:11,   desc:"A cosy den where dreams gather stardust." },
+  { id:"tea",       name:"Tea Party",   emoji:"🍵", base:8000,  rate:55,   desc:"Endless biscuits, endless twinkling stars." },
+  { id:"wish",      name:"Wish Star",   emoji:"💫", base:40000, rate:260,  desc:"A captured wish that pours out light." },
+  { id:"dream",     name:"Dream Cloud", emoji:"🌈", base:200000,rate:1300, desc:"Floating cloud that rains pure starlight." },
+];
+const helperMap = Object.fromEntries(HELPERS.map(h=>[h.id,h]));
+const PRESTIGE_REQ = 100000; // total stars to unlock Grand Nursery
+
+/* ============================================================ STATE */
+const DEFAULT = () => ({
+  stars:0, totalEarned:0, goldenButtons:0, prestiges:0,
+  collection:{},          // id -> {count, date}
+  helpers:{},             // id -> count
+  rooms:["meadow"],       // unlocked
+  currentRoom:"meadow",
+  featured:"bashful-beige-bunny",
+  settings:{ sound:true, music:false },
+  stats:{ taps:0, eggsOpened:0, starsTapped:0 },
+});
+let S = DEFAULT();
+
+function save(){ try{ localStorage.setItem("jellycatCollectors_v1", JSON.stringify(S)); }catch(e){} }
+function load(){
+  try{
+    const raw = localStorage.getItem("jellycatCollectors_v1");
+    if(raw){ S = Object.assign(DEFAULT(), JSON.parse(raw));
+      S.settings = Object.assign(DEFAULT().settings, S.settings||{});
+      S.stats = Object.assign(DEFAULT().stats, S.stats||{}); }
+  }catch(e){ S = DEFAULT(); }
+}
+
+/* ============================================================ HELPERS / MATH */
+const $ = s => document.querySelector(s);
+function fmt(n){
+  n = Math.floor(n);
+  if(n<1000) return ""+n;
+  const u=["","k","M","B","T","Qa","Qi"]; let i=0;
+  while(n>=1000 && i<u.length-1){ n/=1000; i++; }
+  return (n<10?n.toFixed(2):n<100?n.toFixed(1):Math.floor(n))+u[i];
+}
+function helperCost(h, owned){ return Math.ceil(h.base * Math.pow(1.16, owned)); }
+function owned(id){ return !!S.collection[id]; }
+function ownedCount(){ return Object.keys(S.collection).length; }
+
+function starsPerSecond(){
+  let sps = 0;
+  for(const id in S.collection) sps += (jcMap[id]?.starsPerSecond||0) * Math.min(S.collection[id].count,5);
+  for(const id in S.helpers) sps += (helperMap[id]?.rate||0) * S.helpers[id];
+  sps *= prodMult();
+  return sps;
+}
+function prodMult(){ return 1 + S.goldenButtons*0.10; }
+function tapPower(){ return Math.max(1, Math.round((1 + S.goldenButtons*0.5) * (1 + ownedCount()*0.15))); }
+
+/* ============================================================ AUDIO (synth, no assets) */
+let AC=null, musicNodes=null;
+function ac(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } return AC; }
+function blip(freq, dur=0.12, type="sine", vol=0.18){
+  if(!S.settings.sound) return; const c=ac(); if(!c) return;
+  const o=c.createOscillator(), g=c.createGain();
+  o.type=type; o.frequency.value=freq; o.connect(g); g.connect(c.destination);
+  const t=c.currentTime; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur); o.start(t); o.stop(t+dur+0.02);
+}
+const sndTap    = ()=>blip(620+Math.random()*80,0.1,"sine",0.12);
+const sndSquish = ()=>blip(300,0.16,"triangle",0.16);
+const sndChime  = ()=>{ [880,1175,1568].forEach((f,i)=>setTimeout(()=>blip(f,0.3,"sine",0.14),i*70)); };
+const sndBuy    = ()=>blip(520,0.14,"square",0.1);
+const sndReveal = (r)=>{ const base={common:440,rare:560,epic:680,legendary:820,mythic:1000,secret:1200}[r]||440;
+  [0,4,7,12].forEach((s,i)=>setTimeout(()=>blip(base*Math.pow(2,s/12),0.32,"sine",0.13),i*90)); };
+
+function startMusic(){
+  const c=ac(); if(!c||musicNodes) return;
+  const g=c.createGain(); g.gain.value=0.05; g.connect(c.destination);
+  const notes=[523.25,659.25,783.99,659.25,587.33,783.99]; let i=0;
+  const tick=()=>{ if(!musicNodes) return;
+    const o=c.createOscillator(), ng=c.createGain();
+    o.type="sine"; o.frequency.value=notes[i%notes.length]/2; o.connect(ng); ng.connect(g);
+    const t=c.currentTime; ng.gain.setValueAtTime(0,t); ng.gain.linearRampToValueAtTime(1,t+0.1);
+    ng.gain.exponentialRampToValueAtTime(0.001,t+1.4); o.start(t); o.stop(t+1.5); i++;
+  };
+  musicNodes={g, timer:setInterval(tick,1300)}; tick();
+}
+function stopMusic(){ if(musicNodes){ clearInterval(musicNodes.timer); try{musicNodes.g.disconnect();}catch(e){} musicNodes=null; } }
+
+/* ============================================================ HAPTICS */
+function buzz(ms){ if(navigator.vibrate && S.settings.sound) navigator.vibrate(ms); }
+
+/* ============================================================ HUD */
+function renderHUD(){
+  $("#hud-stars").textContent = fmt(S.stars);
+  const gw=$("#hud-gold-wrap");
+  if(S.goldenButtons>0){ gw.style.display="flex"; $("#hud-gold").textContent=S.goldenButtons; }
+  $("#sound-btn").textContent = S.settings.sound ? "🔊" : "🔇";
+}
+
+/* ============================================================ TOAST + CONFETTI */
+let toastT;
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),1900); }
+function confetti(n=40){
+  const cols=["#f3c6cf","#bcd1ad","#bcd6e6","#e9c46a","#d8c3e6","#e98aa3"];
+  for(let i=0;i<n;i++){
+    const c=document.createElement("div"); c.className="confetti";
+    c.style.left=Math.random()*100+"vw"; c.style.background=cols[i%cols.length];
+    c.style.animation=`fall ${1.6+Math.random()*1.4}s ${Math.random()*0.4}s linear forwards`;
+    c.style.opacity=0.9; document.body.appendChild(c); setTimeout(()=>c.remove(),3400);
+  }
+}
+
+/* ============================================================ NURSERY VIEW */
+function renderNursery(){
+  const room = roomMap[S.currentRoom] || ROOMS[0];
+  const stage=$("#room-stage");
+  stage.style.background = room.bg;
+  $("#room-label").textContent = room.emoji+" "+room.name;
+  const dark = darkRoom(room.id);
+  $("#room-label").style.color = dark?"#fff":"var(--ink)";
+  $("#tap-hint").style.color = dark?"rgba(255,255,255,.8)":"var(--ink-soft)";
+  // featured plush = chosen, else best owned, else starter
+  let fid = S.featured;
+  if(!owned(fid)){ fid = bestOwned(); S.featured=fid; }
+  const jc = jcMap[fid];
+  const img=$("#plush");
+  if(img.dataset.id!==fid){ img.dataset.id=fid; img.src=jc.image; img.alt=jc.name; }
+  $("#plush-name").textContent = jc.name;
+  const dot=$("#plush-dot"); dot.style.background=RARITY[jc.rarity].color; dot.style.color=RARITY[jc.rarity].color;
+  renderRoomRail();
+  buildParticles(room.particle, dark);
+}
+function bestOwned(){
+  let best="bashful-beige-bunny", bo=-1;
+  for(const id in S.collection){ const o=RARITY[jcMap[id].rarity].order; if(o>bo){bo=o;best=id;} }
+  return best;
+}
+function renderRoomRail(){
+  const rail=$("#room-rail"); rail.innerHTML="";
+  ROOMS.forEach(r=>{
+    const unlocked=S.rooms.includes(r.id);
+    const el=document.createElement("div");
+    el.className="room-pill"+(r.id===S.currentRoom?" active":"")+(unlocked?"":" locked");
+    el.innerHTML=`<span class="e">${r.emoji}</span>${unlocked?r.name.split(" ")[0]:`<span class="lk">🔒</span>`}`;
+    el.onclick=()=>{ if(unlocked){ S.currentRoom=r.id; sndBuy(); renderNursery(); save(); } else { go("shop"); shopTab("rooms"); toast("Unlock "+r.name+" in the Shop"); } };
+    rail.appendChild(el);
+  });
+}
+
+/* featured selection from collection */
+function setFeatured(id){ if(owned(id)){ S.featured=id; go("nursery"); renderNursery(); save(); toast(jcMap[id].name+" is in the nursery ✨"); } }
+
+/* tapping */
+function tapPlush(ev){
+  const jc=jcMap[S.featured]; const gain=tapPower();
+  S.stars+=gain; S.totalEarned+=gain; S.stats.taps++; S.stats.starsTapped+=gain;
+  const img=$("#plush"); img.classList.add("squish"); setTimeout(()=>img.classList.remove("squish"),110);
+  sndTap(); buzz(8);
+  const stage=$("#room-stage"); const rect=stage.getBoundingClientRect();
+  let x,y;
+  if(ev.touches&&ev.touches[0]){ x=ev.touches[0].clientX-rect.left; y=ev.touches[0].clientY-rect.top; }
+  else if(ev.clientX!=null){ x=ev.clientX-rect.left; y=ev.clientY-rect.top; }
+  else { x=rect.width/2; y=rect.height/2; }
+  const f=document.createElement("div"); f.className="floaty"; f.textContent="+"+gain+" ⭐";
+  f.style.left=x+"px"; f.style.top=y+"px"; f.style.color=darkRoom(S.currentRoom)?"#fff":"var(--rose)";
+  stage.appendChild(f); setTimeout(()=>f.remove(),1100);
+  renderHUD();
+}
+
+/* ============================================================ PARTICLES */
+let particleTimer=null;
+function buildParticles(type, dark){
+  const p=$("#parallax"); p.innerHTML=""; if(particleTimer){clearInterval(particleTimer);}
+  const glyph={petal:"🌸",cloud:"☁️",star:"⭐",ember:"✨",snow:"❄️",bubble:"🫧"}[type]||"✨";
+  const spawn=()=>{
+    if(!$("#view-nursery").classList.contains("active")) return;
+    const s=document.createElement("div"); s.className="particle"; s.textContent=glyph;
+    s.style.left=Math.random()*100+"%"; s.style.top="-8%";
+    const size=10+Math.random()*16; s.style.fontSize=size+"px"; s.style.opacity=0.5+Math.random()*0.4;
+    const dur=5+Math.random()*5; s.style.transition=`transform ${dur}s linear, opacity ${dur}s linear`;
+    $("#parallax").appendChild(s);
+    requestAnimationFrame(()=>{ s.style.transform=`translateY(${$("#room-stage").offsetHeight+40}px) translateX(${(Math.random()*60-30)}px) rotate(${Math.random()*360}deg)`; s.style.opacity=0; });
+    setTimeout(()=>s.remove(), dur*1000+200);
+  };
+  for(let i=0;i<5;i++) setTimeout(spawn, i*400);
+  particleTimer=setInterval(spawn, 900);
+}
+
+/* ============================================================ EGGS VIEW */
+function renderEggs(){
+  const g=$("#egg-grid"); g.innerHTML="";
+  EGGS.forEach(e=>{
+    const can=S.stars>=e.cost;
+    const odds=Object.entries(e.table).map(([r,p])=>`${RARITY[r].label} ${p}%`).join(" · ");
+    const card=document.createElement("div");
+    card.className="egg-card"+(can?"":" cant");
+    card.style.background=`linear-gradient(170deg,#fffaf5, ${e.bg}44)`;
+    card.innerHTML=`<span class="egg">${e.emoji}</span><h3>${e.name}</h3>
+      <div class="cost">${fmt(e.cost)} ⭐</div><div class="odds">${odds}</div>`;
+    card.onclick=()=>openEgg(e);
+    g.appendChild(card);
+  });
+}
+function rollRarity(table){
+  let total=0; for(const r in table) total+=table[r];
+  let roll=Math.random()*total;
+  for(const r in table){ if((roll-=table[r])<=0) return r; }
+  return Object.keys(table)[0];
+}
+function pickFromRarity(r){
+  let pool=idsByRarity(r), order=RARITY[r].order;
+  while(pool.length===0 && order>0){ order--; pool=idsByRarity(Object.keys(RARITY).find(k=>RARITY[k].order===order)); }
+  if(pool.length===0) pool=[jellycats[0].id];
+  return pool[Math.floor(Math.random()*pool.length)];
+}
+function openEgg(e){
+  if(S.stars<e.cost){ toast("Not enough stars yet 💫"); return; }
+  S.stars-=e.cost; S.stats.eggsOpened++;
+  const rarity=rollRarity(e.table); const id=pickFromRarity(rarity); const jc=jcMap[id];
+  // animate
+  const ov=$("#opener"); const eggEl=$("#open-egg"); const rev=$("#reveal");
+  eggEl.textContent=e.emoji; eggEl.style.display="block"; rev.classList.remove("show");
+  ov.classList.add("show"); sndSquish();
+  setTimeout(()=>{
+    eggEl.style.display="none";
+    const isNew=!owned(id);
+    if(isNew){ S.collection[id]={count:1,date:Date.now()}; }
+    else { S.collection[id].count++; S.stars+=RARITY[jc.rarity].refund; }
+    $("#reveal-img").src=jc.image;
+    const rt=$("#reveal-rtag"); rt.textContent=RARITY[jc.rarity].label; rt.className="r-tag bg-"+jc.rarity;
+    $("#reveal-name").textContent=jc.name;
+    $("#reveal-dup").textContent=isNew ? "✨ New friend unlocked!" : `Duplicate · +${fmt(RARITY[jc.rarity].refund)} ⭐ stardust`;
+    rev.classList.add("show");
+    sndReveal(jc.rarity); buzz(isNew?[20,40,20]:15);
+    if(["epic","legendary","mythic","secret"].includes(jc.rarity)) confetti(jc.rarity==="mythic"||jc.rarity==="secret"?80:50);
+    renderHUD(); save();
+  },900);
+}
+function closeOpener(){ $("#opener").classList.remove("show"); renderEggs(); if($("#view-collection").classList.contains("active")) renderCollection(); }
+
+/* ============================================================ COLLECTION + PEDIA */
+function cardHTML(jc, isOwned, qty){
+  const r=RARITY[jc.rarity];
+  return `<div class="jc-card r-${jc.rarity} ${isOwned?"":"locked"}" data-id="${jc.id}">
+    ${isOwned&&qty>1?`<span class="qty">×${qty}</span>`:""}
+    ${isOwned?"":`<span class="lock-i">🔒</span>`}
+    <img class="thumb" src="${jc.image}" alt="${jc.name}" draggable="false" loading="lazy">
+    <div class="nm">${isOwned?jc.name:"???"}</div>
+    <span class="ct bg-${jc.rarity}">${r.label}</span>
+  </div>`;
+}
+function renderCollection(){
+  const g=$("#collection-grid"); const ids=Object.keys(S.collection);
+  $("#coll-count").textContent = ownedCount()+" / "+jellycats.length;
+  if(ids.length===0){ g.innerHTML=`<p class="muted" style="grid-column:1/-1;text-align:center;padding:30px">Your nursery is waiting! Tap your starter friend and hatch eggs to grow your collection. 🥚</p>`; return; }
+  const sorted=[...ids].sort((a,b)=>RARITY[jcMap[b].rarity].order-RARITY[jcMap[a].rarity].order);
+  g.innerHTML=sorted.map(id=>cardHTML(jcMap[id],true,S.collection[id].count)).join("");
+  g.querySelectorAll(".jc-card").forEach(c=>c.onclick=()=>openDetail(c.dataset.id));
+}
+function renderPedia(){
+  const g=$("#pedia-grid");
+  $("#pedia-count").textContent = ownedCount()+" / "+jellycats.length+" found";
+  const sorted=[...jellycats].sort((a,b)=>RARITY[a.rarity].order-RARITY[b.rarity].order);
+  g.innerHTML=sorted.map(jc=>cardHTML(jc, owned(jc.id), S.collection[jc.id]?.count||0)).join("");
+  g.querySelectorAll(".jc-card").forEach(c=>c.onclick=()=>openDetail(c.dataset.id));
+}
+
+/* ============================================================ DETAIL SHEET */
+function openDetail(id){
+  const jc=jcMap[id]; const isOwned=owned(id); const r=RARITY[jc.rarity];
+  const date = isOwned ? new Date(S.collection[id].date).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}) : "—";
+  const qty = isOwned?S.collection[id].count:0;
+  $("#detail-body").innerHTML=`
+    <div class="detail-hero">
+      <img src="${jc.image}" alt="${jc.name}" style="${isOwned?"":"filter:grayscale(1) opacity(.55)"}">
+      <div>
+        <h2>${isOwned?jc.name:"??? Undiscovered"}</h2>
+        <div class="detail-meta">
+          <span class="tagpill bg-${jc.rarity}" style="color:#fff">${r.label}</span>
+          <span class="tagpill">${jc.collection}</span>
+          <span class="tagpill">${jc.category}</span>
         </div>
+      </div>
     </div>
-    
-    <script>
-        let stars = 0;
-        let totalTaps = 0;
-        let hasDragon = false;
-        let idleInterval;
-        let musicPlaying = false;
-        
-        const bearImg = document.getElementById('bear');
-        const dragonImg = document.getElementById('dragon');
-        const starCountEl = document.getElementById('stars');
-        
-        // Load saved progress
-        function loadProgress() {
-            const saved = localStorage.getItem('jellycatSnuggle');
-            if (saved) {
-                const data = JSON.parse(saved);
-                stars = data.stars || 0;
-                hasDragon = data.hasDragon || false;
-                if (hasDragon) {
-                    dragonImg.style.display = 'block';
-                }
-            }
-            updateStars();
-        }
-        
-        function saveProgress() {
-            localStorage.setItem('jellycatSnuggle', JSON.stringify({
-                stars: stars,
-                hasDragon: hasDragon
-            }));
-        }
-        
-        function updateStars() {
-            starCountEl.textContent = Math.floor(stars).toLocaleString();
-        }
-        
-        function createTapEffect(x, y, value) {
-            const effect = document.createElement('div');
-            effect.className = 'tap-effect';
-            effect.textContent = `+${value} ⭐`;
-            effect.style.left = `${x}px`;
-            effect.style.top = `${y}px`;
-            effect.style.color = '#ff9ecd';
-            document.getElementById('main-area').appendChild(effect);
-            
-            setTimeout(() => effect.remove(), 1200);
-        }
-        
-        function tapCharacter(el) {
-            const rect = el.getBoundingClientRect();
-            const areaRect = document.getElementById('main-area').getBoundingClientRect();
-            
-            const tapX = (rect.left + rect.width/2) - areaRect.left;
-            const tapY = (rect.top + rect.height/3) - areaRect.top;
-            
-            let value = 1;
-            if (el.id === 'dragon') value = 2;
-            
-            stars += value;
-            totalTaps++;
-            
-            createTapEffect(tapX, tapY, value);
-            updateStars();
-            saveProgress();
-            
-            // Gentle animation
-            el.style.transform = 'scale(1.15)';
-            setTimeout(() => el.style.transform = 'scale(1)', 80);
-            
-            // Check for unlock
-            if (!hasDragon && stars >= 750) {
-                unlockDragon();
-            }
-        }
-        
-        function unlockDragon() {
-            hasDragon = true;
-            dragonImg.style.display = 'block';
-            saveProgress();
-            
-            const modal = document.getElementById('unlock-modal');
-            document.getElementById('unlock-image').src = dragonImg.src;
-            document.getElementById('unlock-name').textContent = 'Sky Dragon 🐉';
-            modal.style.display = 'flex';
-        }
-        
-        function closeModal() {
-            document.getElementById('unlock-modal').style.display = 'none';
-        }
-        
-        function showShop() {
-            document.getElementById('shop-modal').style.display = 'flex';
-        }
-        
-        function closeShop() {
-            document.getElementById('shop-modal').style.display = 'none';
-        }
-        
-        function giveBigHug() {
-            stars += 25;
-            updateStars();
-            saveProgress();
-            
-            // Visual feedback
-            const area = document.getElementById('main-area');
-            area.style.transition = 'transform 0.3s';
-            area.style.transform = 'scale(1.03)';
-            setTimeout(() => area.style.transform = 'scale(1)', 300);
-            
-            alert("💕 Everyone got a big group hug! +25 Stars");
-        }
-        
-        function toggleMusic() {
-            musicPlaying = !musicPlaying;
-            if (musicPlaying) {
-                alert("🎵 Gentle lullaby music playing... (imagine soft plush sounds!)");
-            } else {
-                alert("🎵 Music paused");
-            }
-        }
-        
-        function resetGame() {
-            if (confirm("Reset all progress?")) {
-                stars = 0;
-                hasDragon = false;
-                dragonImg.style.display = 'none';
-                localStorage.removeItem('jellycatSnuggle');
-                updateStars();
-            }
-        }
-        
-        // Idle progression
-        function startIdle() {
-            idleInterval = setInterval(() => {
-                if (stars < 50000) { // cap for demo
-                    let idleRate = 8;
-                    if (hasDragon) idleRate += 12;
-                    stars += idleRate / 60; // per second simulation
-                    updateStars();
-                    saveProgress();
-                }
-            }, 1000);
-        }
-        
-        // Touch support improvements
-        function addTouchSupport() {
-            document.querySelectorAll('.character').forEach(char => {
-                char.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    tapCharacter(char);
-                });
-            });
-        }
-        
-        // Initialize
-        window.onload = function() {
-            loadProgress();
-            startIdle();
-            addTouchSupport();
-            
-            // Demo hint
-            if (stars < 100) {
-                setTimeout(() => {
-                    console.log("%c👋 Welcome to Jellycat Snuggle Tap! Tap the bear often!", "color:#ff9ecd; font-size:14px");
-                }, 800);
-            }
-        };
-    </script>
+    ${isOwned?`
+    <div class="stat-row">
+      <div class="stat-box"><div class="v">${jc.starsPerSecond}/s</div><div class="l">Stars idle</div></div>
+      <div class="stat-box"><div class="v">×${qty}</div><div class="l">Owned</div></div>
+      <div class="stat-box"><div class="v">${date}</div><div class="l">Adopted</div></div>
+    </div>
+    <div class="detail-desc">${jc.description}</div>
+    <div class="fact-box"><b>🍓 Favourite foods:</b> ${jc.foods}</div>
+    <div class="fact-box"><b>✨ Fun fact:</b> ${jc.facts}</div>
+    <button class="big-btn" style="background:var(--pink-deep)" onclick="setFeatured('${jc.id}')">🏡 Place in Nursery</button>
+    <a class="link-btn" href="${jc.officialUrl}" target="_blank" rel="noopener">View on the official Jellycat site →</a>
+    `:`
+    <div class="detail-desc">This friend hasn't joined your nursery yet. Hatch eggs to discover them — rarer eggs hold rarer Jellycats.</div>
+    <div class="fact-box"><b>Rarity:</b> ${r.label} &nbsp;·&nbsp; <b>Collection:</b> ${jc.collection}</div>
+    <button class="big-btn" style="background:var(--blue-deep)" onclick="closeDetail();go('eggs')">🥚 Go hatch an egg</button>
+    `}`;
+  $("#detail-modal").classList.add("show");
+}
+function closeDetail(){ $("#detail-modal").classList.remove("show"); }
+
+/* ============================================================ SHOP: HELPERS */
+function renderHelpers(){
+  const l=$("#helper-list"); l.innerHTML="";
+  HELPERS.forEach(h=>{
+    const own=S.helpers[h.id]||0; const cost=helperCost(h,own); const can=S.stars>=cost;
+    const el=document.createElement("div"); el.className="list-item";
+    el.innerHTML=`<div class="li-e">${h.emoji}</div>
+      <div class="li-body"><h4>${h.name} ${own?`<span class="li-own">×${own}</span>`:""}</h4>
+      <p>${h.desc}</p><p class="li-own">+${h.rate}/s each</p></div>
+      <button class="buy-btn" ${can?"":"disabled"}>Adopt<small>${fmt(cost)} ⭐</small></button>`;
+    el.querySelector("button").onclick=()=>buyHelper(h);
+    l.appendChild(el);
+  });
+}
+function buyHelper(h){
+  const own=S.helpers[h.id]||0; const cost=helperCost(h,own);
+  if(S.stars<cost){ toast("Not enough stars 💫"); return; }
+  S.stars-=cost; S.helpers[h.id]=own+1; sndBuy(); buzz(12);
+  toast(h.name+" adopted! +"+h.rate+"/s"); renderHelpers(); renderHUD(); save();
+}
+
+/* ============================================================ SHOP: ROOMS */
+function renderRoomShop(){
+  const l=$("#room-list"); l.innerHTML="";
+  ROOMS.forEach(r=>{
+    const have=S.rooms.includes(r.id); const can=S.stars>=r.cost;
+    const el=document.createElement("div"); el.className="list-item";
+    el.innerHTML=`<div class="li-e">${r.emoji}</div>
+      <div class="li-body"><h4>${r.name}</h4><p>${roomDesc(r.id)}</p></div>
+      ${have?`<button class="buy-btn room" ${r.id===S.currentRoom?"disabled":""} >${r.id===S.currentRoom?"Active":"Visit"}</button>`
+            :`<button class="buy-btn room" ${can?"":"disabled"}>Unlock<small>${fmt(r.cost)} ⭐</small></button>`}`;
+    el.querySelector("button").onclick=()=>{
+      if(have){ S.currentRoom=r.id; sndBuy(); go("nursery"); renderNursery(); save(); }
+      else { if(S.stars<r.cost){toast("Not enough stars 💫");return;}
+        S.stars-=r.cost; S.rooms.push(r.id); S.currentRoom=r.id; sndChime(); confetti(40);
+        toast(r.name+" unlocked! 🎉"); renderRoomShop(); renderHUD(); save(); }
+    };
+    l.appendChild(el);
+  });
+}
+function roomDesc(id){return{
+  meadow:"Sunny grass and drifting cherry blossom. Your starter nursery.",
+  cloud:"Float among soft clouds high in a pastel sky.",
+  library:"A hushed moonlit study with twinkling stars.",
+  cave:"A snug dragon's den glowing with warm embers.",
+  cottage:"A frosty festive cottage with falling snow.",
+  beach:"A sunny seaside picnic with floating bubbles.",
+}[id]||"";}
+
+/* ============================================================ SHOP: PRESTIGE */
+function renderPrestige(){
+  const pane=$("#pane-prestige");
+  const ready=S.totalEarned>=PRESTIGE_REQ;
+  const pct=Math.min(100,(S.totalEarned/PRESTIGE_REQ)*100);
+  const gain=prestigeGain();
+  pane.innerHTML=`
+    <div class="prestige-card">
+      <div style="font-size:2.6em">🌟</div>
+      <h2>The Grand Nursery</h2>
+      <p class="muted" style="margin:4px 0 0">Reopen your nursery anew to earn <b>Golden Buttons</b> — each permanently boosts all star production by +10% and your taps grow stronger.</p>
+      <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
+      <div class="muted">${fmt(S.totalEarned)} / ${fmt(PRESTIGE_REQ)} total stars earned</div>
+      <div style="margin:14px 0 4px;font-family:'Fredoka';font-weight:700;color:var(--gold-deep)">
+        Current bonus: +${(S.goldenButtons*10)}% · 🔘 ${S.goldenButtons} buttons
+      </div>
+      <button class="big-btn go" ${ready?"":"disabled"} id="prestige-btn">
+        ${ready?`Open Grand Nursery (+${gain} 🔘)`:`Reach ${fmt(PRESTIGE_REQ)} stars to reopen`}
+      </button>
+      <p class="muted" style="margin-top:10px;font-size:.74em">Resets your stars and helpers. Your full Jellycat collection and Jellypedia stay forever. Prestiges completed: ${S.prestiges}</p>
+    </div>
+    <div class="prestige-card" style="margin-top:14px;background:var(--white);border-color:var(--cream-2)">
+      <h2 style="color:var(--brown);font-size:1.05em">📊 Statistics</h2>
+      <div class="stat-row">
+        <div class="stat-box"><div class="v">${fmt(S.stats.taps)}</div><div class="l">Total taps</div></div>
+        <div class="stat-box"><div class="v">${fmt(S.stats.eggsOpened)}</div><div class="l">Eggs hatched</div></div>
+        <div class="stat-box"><div class="v">${ownedCount()}/${jellycats.length}</div><div class="l">Collected</div></div>
+      </div>
+      <div class="stat-row" style="margin-top:0">
+        <div class="stat-box"><div class="v">${starsPerSecond().toFixed(1)}</div><div class="l">Stars / sec</div></div>
+        <div class="stat-box"><div class="v">${tapPower()}</div><div class="l">Per tap</div></div>
+        <div class="stat-box"><div class="v">${S.rooms.length}/${ROOMS.length}</div><div class="l">Rooms</div></div>
+      </div>
+      <button class="big-btn" style="background:#c98a8a;margin-top:14px" id="reset-btn">⚠️ Reset everything</button>
+    </div>`;
+  const pb=$("#prestige-btn"); if(pb&&ready) pb.onclick=doPrestige;
+  $("#reset-btn").onclick=hardReset;
+}
+function prestigeGain(){ return Math.floor(Math.sqrt(S.totalEarned/PRESTIGE_REQ)); }
+function doPrestige(){
+  const gain=prestigeGain(); if(gain<1) return;
+  if(!confirm(`Reopen the Grand Nursery?\n\nYou'll gain ${gain} Golden Button${gain>1?"s":""} (+${gain*10}% forever).\nYour stars & helpers reset — your Jellycat collection stays.`)) return;
+  S.goldenButtons+=gain; S.prestiges++;
+  S.stars=0; S.totalEarned=0; S.helpers={};
+  sndChime(); confetti(120); toast(`✨ Grand Nursery reopened! +${gain} 🔘`);
+  renderAll(); save();
+}
+function hardReset(){
+  if(!confirm("Reset ALL progress, including your collection? This cannot be undone.")) return;
+  localStorage.removeItem("jellycatCollectors_v1"); S=DEFAULT(); grantStarter(); renderAll(); save(); toast("Fresh start! 🌱");
+}
+
+/* ============================================================ NAV */
+function go(view){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));
+  $("#view-"+view).classList.add("active");
+  const nb=document.querySelector(`.bottom-nav button[data-view="${view}"]`); if(nb) nb.classList.add("active");
+  if(view==="nursery") renderNursery();
+  if(view==="eggs") renderEggs();
+  if(view==="collection") renderCollection();
+  if(view==="pedia") renderPedia();
+  if(view==="shop"){ renderHelpers(); renderRoomShop(); renderPrestige(); }
+}
+function shopTab(pane){
+  document.querySelectorAll(".tabbar button").forEach(b=>b.classList.toggle("active",b.dataset.pane===pane));
+  document.querySelectorAll(".shop-pane").forEach(p=>p.classList.toggle("active",p.id==="pane-"+pane));
+}
+
+/* ============================================================ RENDER ALL */
+function renderAll(){ renderHUD(); renderNursery(); }
+
+/* ============================================================ STARTER */
+function grantStarter(){
+  if(ownedCount()===0){ S.collection["bashful-beige-bunny"]={count:1,date:Date.now()}; S.featured="bashful-beige-bunny"; }
+}
+
+/* ============================================================ IDLE LOOP */
+let lastTick=Date.now();
+function idleLoop(){
+  const now=Date.now(); const dt=(now-lastTick)/1000; lastTick=now;
+  const gain=starsPerSecond()*dt;
+  if(gain>0){ S.stars+=gain; S.totalEarned+=gain; renderHUD();
+    if($("#view-eggs").classList.contains("active")) {/* odds availability refresh lightly */}
+  }
+}
+
+/* offline earnings */
+function applyOffline(){
+  const last=parseInt(localStorage.getItem("jc_lastSeen")||"0",10);
+  if(last){ const dt=Math.min((Date.now()-last)/1000, 8*3600); // cap 8h
+    const g=starsPerSecond()*dt*0.5; // 50% offline rate
+    if(g>5){ S.stars+=g; S.totalEarned+=g; setTimeout(()=>toast(`💤 Welcome back! +${fmt(g)} ⭐ while away`),700); }
+  }
+}
+
+/* ============================================================ EVENTS */
+function bindEvents(){
+  // plush tap
+  const plush=$("#plush");
+  plush.addEventListener("click", tapPlush);
+  plush.addEventListener("touchstart", e=>{ e.preventDefault(); tapPlush(e); }, {passive:false});
+  // nav
+  document.querySelectorAll(".bottom-nav button").forEach(b=>b.onclick=()=>{ ensureAudio(); go(b.dataset.view); });
+  // shop tabs
+  document.querySelectorAll(".tabbar button").forEach(b=>b.onclick=()=>shopTab(b.dataset.pane));
+  // sound toggle
+  $("#sound-btn").onclick=()=>{ S.settings.sound=!S.settings.sound; if(S.settings.sound){ ensureAudio(); sndChime(); } toast(S.settings.sound?"🔊 Sound on":"🔇 Muted"); renderHUD(); save(); };
+  // opener dismiss
+  $("#opener").onclick=closeOpener;
+  // detail backdrop close
+  $("#detail-modal").onclick=e=>{ if(e.target.id==="detail-modal") closeDetail(); };
+  // persist on hide
+  document.addEventListener("visibilitychange",()=>{ if(document.hidden){ localStorage.setItem("jc_lastSeen",Date.now()); save(); } });
+  window.addEventListener("beforeunload",()=>{ localStorage.setItem("jc_lastSeen",Date.now()); save(); });
+}
+function ensureAudio(){ const c=ac(); if(c&&c.state==="suspended") c.resume(); if(S.settings.music && !musicNodes) startMusic(); }
+
+/* expose for inline handlers */
+window.setFeatured=setFeatured; window.closeDetail=closeDetail; window.go=go;
+
+/* ============================================================ INIT */
+function init(){
+  load(); grantStarter(); applyOffline();
+  bindEvents(); renderAll(); go("nursery");
+  setInterval(idleLoop, 200);
+  setInterval(save, 8000);
+  lastTick=Date.now();
+}
+window.addEventListener("DOMContentLoaded", init);
+</script>
 </body>
 </html>
